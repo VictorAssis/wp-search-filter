@@ -82,8 +82,41 @@ class FilterFieldWidget extends WP_Widget {
 		return $instance;
 	}
 }
+class ResetFilterWidget extends WP_Widget {
+
+	function __construct() {
+		// Instantiate the parent object
+		parent::__construct( false, 'WPFS: Reset Filter' );
+	}
+
+	function widget( $args, $instance ) {
+        if (empty( $instance['btn_text'] ) || !isset($_GET['f']) || !is_array($_GET['f']) || !count($_GET['f']))
+            return;
+        echo '<div class="wpfs-reset-filter">';
+        echo "<a id='wpfs-reset-filter-button' class='button'>" . $instance['btn_text'] . "</a>";
+        echo '</div>';
+	}
+
+	function form( $instance ) {
+		$btn_text = ! empty( $instance['btn_text'] ) ? $instance['btn_text'] : esc_html__( 'Limpar filtros', 'wp-search-filter' );
+?>
+		<p>
+		    <label for="<?php echo esc_attr( $this->get_field_id( 'btn_text' ) ); ?>"><?php esc_attr_e( 'Button Label:', 'wp-search-filter' ); ?></label> 
+		    <input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'btn_text' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'btn_text' ) ); ?>" type="text" value="<?php echo esc_attr( $btn_text ); ?>">
+		</p>
+		<?php 
+	}
+
+	function update( $new_instance, $old_instance ) {
+		$instance = array();
+		$instance['btn_text'] = ( ! empty( $new_instance['btn_text'] ) ) ? sanitize_text_field( $new_instance['btn_text'] ) : '';
+
+		return $instance;
+	}
+}
 function wpfilterfield_register_widgets() {
 	register_widget( 'FilterFieldWidget' );
+	register_widget( 'ResetFilterWidget' );
 }
 add_action( 'widgets_init', 'wpfilterfield_register_widgets' );
 

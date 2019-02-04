@@ -1,4 +1,5 @@
-.wpfs-filter-field {
+.wpfs-filter-field,
+.wpfs-reset-filter {
     margin-bottom: 15px;
 }
 .wpfs-filter-field label {

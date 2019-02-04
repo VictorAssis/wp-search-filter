@@ -21,6 +21,11 @@
         }
         update_results();
     }
+    
+    var clear_params = function() {
+        params.f = {};
+        update_results();
+    }
 
     var update_results = function() {
         show_loading();
@@ -77,6 +82,10 @@
                 add_param(name,value);
             else
                 remove_param(name,value);
+        });
+
+        $('body').on('click','#wpfs-reset-filter-button', function(){
+            clear_params();
         });
 	});
 
