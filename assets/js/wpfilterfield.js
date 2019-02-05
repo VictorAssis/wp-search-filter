@@ -45,6 +45,7 @@
         $.get(document.URL,'',function(data){
             $(".site-content").html($(data).find(".site-content"));
             hide_loading();
+            toggle_reset();
         },'html');
     }
 
@@ -54,6 +55,13 @@
 
     var hide_loading = function () {
         $(".wpfilterfield-loading").removeClass('loading');
+    }
+
+    var toggle_reset = function () {
+        if (Object.keys(params.f).length)
+            $(".wpfs-reset-filter").addClass('active');
+        else
+            $(".wpfs-reset-filter").removeClass('active');
     }
 
     // change
@@ -74,6 +82,9 @@
                 $('.wpfs-filter-field input[type="checkbox"][name="'+key+'[]"][value="'+params.f[key][i]+'"]').attr('checked','checked');
             }
         }
+
+        //Show reset button
+        toggle_reset();
 
         $('.wpfs-filter-field').on('change', 'input[type="checkbox"]', function(){
             var name = $(this).attr('name').replace('[]','');

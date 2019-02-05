@@ -90,7 +90,7 @@ class ResetFilterWidget extends WP_Widget {
 	}
 
 	function widget( $args, $instance ) {
-        if (empty( $instance['btn_text'] ) || !isset($_GET['f']) || !is_array($_GET['f']) || !count($_GET['f']))
+        if (empty( $instance['btn_text'] ))
             return;
         echo '<div class="wpfs-reset-filter">';
         echo "<a id='wpfs-reset-filter-button' class='button'>" . $instance['btn_text'] . "</a>";

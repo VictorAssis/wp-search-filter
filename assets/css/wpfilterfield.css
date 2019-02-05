@@ -32,3 +32,9 @@
     background: url(../img/loading.gif) no-repeat center center;
     transform: translate(-50%,-50%);
 }
+.wpfs-reset-filter {
+    display: none;
+}
+.wpfs-reset-filter.active {
+    display: block;
+}
